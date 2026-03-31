@@ -1,3 +1,3 @@
-self.addEventListener('fetch', function(event) {
-  // Этот код позволяет приложению работать даже без интернета
+self.addEventListener('fetch', (event) => {
+  // Пустой обработчик для работы PWA
 });
