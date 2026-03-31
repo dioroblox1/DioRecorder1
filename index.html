@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head> 
-    <link rel="manifest" href="manifest.json">
-
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DioRecorder — v1.0.0</title>
+    
+    <!-- Подключаем манифест для работы кнопки установки -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+
     <style>
         :root { 
             --bg: #050505; 
@@ -64,7 +67,7 @@
 
         .version-tag { position: absolute; bottom: 15px; right: 25px; font-size: 0.7rem; color: #444; font-weight: bold; }
 
-        /* Состояния */
+        /* Состояния записи */
         .recording .main-btn { background: var(--accent); box-shadow: 0 0 25px rgba(239, 68, 68, 0.4); }
         .recording .rec-icon { border-radius: 4px; width: 30px; height: 30px; }
         .recording .pause-btn { display: flex; }
@@ -101,6 +104,13 @@
 </div>
 
 <script>
+    // РЕГИСТРАЦИЯ SERVICE WORKER (Обязательно для установки)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error:', err));
+        });
+    }
+
     let mediaRecorder, recordedChunks = [], startTime, timerInterval, totalPausedTime = 0, pauseStart, isRecording = false;
     const toggleBtn = document.getElementById('toggleBtn'), pauseBtn = document.getElementById('pauseBtn'), 
           preview = document.getElementById('preview'), app = document.getElementById('app'), timerDisplay = document.getElementById('timer');
@@ -163,14 +173,10 @@
     }
 
     toggleBtn.onclick = toggleRecording;
-</script> 
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>  
+</script>
 </body>
 </html>
+
 
 
 
