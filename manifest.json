@@ -1,0 +1,9 @@
+{
+  "name": "DioRecorder",
+  "short_name": "DioRec",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#3b82f6",
+  "icons":
+}
